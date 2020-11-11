@@ -18,16 +18,24 @@ function calculate() {
     let number = 0;
     let initialOperations = [];
     let operation = '';
+    let multiplier = 1;
 
     for (let i = 0; i < input.length; i++) {
         if (typeof input[i] === 'number') {
             number *= 10;
             number += input[i];
         } else if (typeof input[i] === 'string') {
-            initialNumbers.push(number);
-            number = 0;
-            operation = input[i];
-            initialOperations.push(operation);
+            if(input[i] == '-' && (typeof input[i-1] === 'string' || i === 0)){
+                multiplier = -1;
+            }else{
+                number *= multiplier;
+                multiplier = 1;
+                console.log(i);
+                initialNumbers.push(number);
+                number = 0;
+                operation = input[i];
+                initialOperations.push(operation);
+            }
         }
     }
 
